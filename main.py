@@ -11,6 +11,7 @@ async def main():
         if not prompt.strip():
             logger.warning("Empty prompt provided.")
             return
+        logger.info(f"Received prompt: {prompt}")
 
         logger.warning("Processing your request...")
         await agent.run(prompt)

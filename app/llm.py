@@ -732,6 +732,7 @@ class LLM:
                     temperature if temperature is not None else self.temperature
                 )
 
+            logger.debug(f"Tool request params: {params}")
             response: ChatCompletion = await self.client.chat.completions.create(
                 **params, stream=False
             )
@@ -746,7 +747,7 @@ class LLM:
             self.update_token_count(
                 response.usage.prompt_tokens, response.usage.completion_tokens
             )
-
+            logger.debug(f"Tool response: {response}")
             return response.choices[0].message
 
         except TokenLimitExceeded:
